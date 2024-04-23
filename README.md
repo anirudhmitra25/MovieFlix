@@ -2,6 +2,8 @@
 
 This is a mobile application developed using React Native and Redux, powered by the TMDb API. The app allows users to browse movies, view details, search for movies, and filter by genre.
 
+![Demo](assets/demo.gif)
+
 ## Features
 
 - **Scrolling**: Scrolling up fetches movies from previous years, while scrolling down fetches movies from next years.
