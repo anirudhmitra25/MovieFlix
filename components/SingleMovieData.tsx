@@ -181,7 +181,11 @@ const SingleMovieData: React.FC<MovieModalProps> = ({
                 {credits.cast.map((cast, key) => (
                   <View key={key} style={styles.castContainer}>
                     <Image
-                      source={{ uri: cast.image }}
+                      source={
+                        cast.image
+                          ? { uri: cast.image }
+                          : require("../assets/placeholder.png")
+                      }
                       style={styles.castImage}
                     ></Image>
                     <Text style={styles.castText}>{cast.actorName}</Text>
@@ -204,7 +208,11 @@ const SingleMovieData: React.FC<MovieModalProps> = ({
                 {credits.crew.map((crew, key) => (
                   <View key={key} style={styles.castContainer}>
                     <Image
-                      source={{ uri: crew.image }}
+                      source={
+                        crew.image
+                          ? { uri: crew.image }
+                          : require("../assets/placeholder.png")
+                      }
                       style={styles.castImage}
                     ></Image>
                     <Text style={styles.castText}>{crew.crewName}</Text>

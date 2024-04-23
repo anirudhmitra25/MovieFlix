@@ -18,7 +18,9 @@ export default async function getCreditsData(id: number) {
           id: data.id,
           actorName: data.name,
           characterName: data.character,
-          image: `${baseURL + imageSize + data.profile_path}`,
+          image: data.profile_path
+            ? `${baseURL + imageSize + data.profile_path}`
+            : null,
         };
       });
       let crewData = credits.crew
@@ -33,7 +35,9 @@ export default async function getCreditsData(id: number) {
             id: data.id,
             crewName: data.name,
             job: data.job,
-            image: `${baseURL + imageSize + data.profile_path}`,
+            image: data.profile_path
+              ? `${baseURL + imageSize + data.profile_path}`
+              : null,
           };
         });
       const cleaned_movie_data = {

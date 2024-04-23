@@ -8,14 +8,11 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
-import Header from "../components/Header";
-import Genre from "../components/Genre";
 import _ from "lodash";
-import MoviesList from "../components/MoviesList";
-import SingleMovieData from "../components/SingleMovieData";
 import { getGenres } from "../api";
 import { setLoading } from "../store/actions";
 import { connect } from "react-redux";
+import { Header, SingleMovieData, MoviesList, Genre } from "../components";
 interface ILandingScreen {
   isLoading?: boolean;
   setLoading?: any;
@@ -24,7 +21,6 @@ interface ILandingScreen {
 }
 
 const LandingScreen = ({
-  setLoading,
   isLoading,
   navigation,
   selectedMovie,

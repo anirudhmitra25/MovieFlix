@@ -15,7 +15,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { getSearchMovies } from "../api";
 import { setSearch } from "../store/actions";
 import _ from "lodash";
-import SingleMovieData from "../components/SingleMovieData";
+import { SingleMovieData } from "../components";
 
 const SearchScreen = ({ navigation, searchTerm, setSearch }: any) => {
   const [movies, setMovies] = useState<any>([]);
