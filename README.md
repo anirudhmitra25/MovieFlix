@@ -4,6 +4,9 @@ This is a mobile application developed using React Native and Redux, powered by 
 
 ![Demo](assets/demo.gif)
 
+## Demo Apk:
+https://drive.google.com/file/d/1m3y0uBwKZm11YwzdNjgzYtwkBsyxsMP_/view?usp=sharing
+
 ## Features
 
 - **Scrolling**: Scrolling up fetches movies from previous years, while scrolling down fetches movies from next years.
