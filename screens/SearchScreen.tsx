@@ -155,8 +155,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "black",
-    // padding: 10,
-    paddingTop: 20,
+    paddingHorizontal:20,
   },
   image: {
     width: 100,
@@ -174,9 +173,13 @@ const styles = StyleSheet.create({
   searchContainer: {
     flex: 1,
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
     paddingHorizontal: 10,
+    marginRight:20,
     marginLeft: 10,
+    width:"100%",
+    height:40,
+    backgroundColor:"rgba(88,88,88,0.75)"
   },
   searchInput: {
     flex: 1,
@@ -184,7 +187,7 @@ const styles = StyleSheet.create({
   },
   backIcon: {
     marginRight: 10,
-    marginLeft:5
+    marginLeft:15
   },
   movieItem: {
     paddingVertical: 10,

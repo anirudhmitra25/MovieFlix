@@ -2,24 +2,24 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import SingleMovieData from "./SingleMovieData";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { connect } from "react-redux";
+import { setSelectedMovie } from "../store/actions";
 
 interface IMovie {
   id: number;
   title: string;
   rating: string;
   image: string;
+  setSelectedMovie: any;
 }
 
-const Movie = ({ id, title, rating, image }: IMovie) => {
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
-
+const Movie = ({ id, title, rating, image, setSelectedMovie }: IMovie) => {
   return (
     <View>
-      <TouchableOpacity style={styles.container} onPress={toggleModal}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => setSelectedMovie(id)}
+      >
         <Image source={{ uri: image }} style={styles.image}></Image>
         <View style={styles.overlay}>
           <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
@@ -36,7 +36,6 @@ const Movie = ({ id, title, rating, image }: IMovie) => {
           </View>
         </View>
       </TouchableOpacity>
-      <SingleMovieData id={id} isVisible={modalVisible} onClose={toggleModal} />
     </View>
   );
 };
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   },
   ratingIcon: {
     marginTop: 4,
-    marginRight:3
+    marginRight: 3,
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.3)",
@@ -80,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Movie;
+export default connect(null, { setSelectedMovie })(Movie);

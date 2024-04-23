@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { ScrollView, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { selectGenre, unselectGenre } from "../store/actions";
@@ -28,6 +28,12 @@ const Genre = ({
     }
   };
 
+  useEffect(() => {
+    if (selectedGenres.length === 0 && genres.length > 0) {
+      selectGenre(0);
+    }
+  }, [selectedGenres, genres]);
+
   const handleRemoveGenre = (genreId: number) => {
     unselectGenre(genreId);
   };
@@ -56,7 +62,7 @@ const Genre = ({
             >
               {genre.name}
             </Text>
-            {selectedGenres.includes(genre.id) && (
+            {selectedGenres.includes(genre.id) && genre.id!==0 && (
               <TouchableOpacity
                 onPress={() => handleRemoveGenre(genre.id)}
                 style={styles.crossButton}

@@ -15,4 +15,4 @@ async function getGenres() {
   }
 }
 
-export default getGenres
+export default getGenres;

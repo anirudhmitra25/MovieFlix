@@ -31,17 +31,17 @@ const Header = ({ navigation }: IHeader) => {
 const styles = StyleSheet.create({
   header: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    backgroundColor: "rgba(0,0,0,0)", // Transparent background
+    backgroundColor: "rgba(0,0,0,0)",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingBottom: 15,
+    paddingBottom: 5,
   },
   title: {
     color: "white",
     fontSize: 18,
     fontWeight: "bold",
-    paddingTop: 10,
+    paddingTop: 0,
     paddingLeft: 10,
   },
   searchIcon: {

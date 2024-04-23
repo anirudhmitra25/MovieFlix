@@ -15,6 +15,7 @@ export default async function getCreditsData(id: number) {
       const imageSize = "w500";
       let castData = credits.cast.slice(0, 10).map((data: any) => {
         return {
+          id: data.id,
           actorName: data.name,
           characterName: data.character,
           image: `${baseURL + imageSize + data.profile_path}`,
@@ -29,6 +30,7 @@ export default async function getCreditsData(id: number) {
         )
         .map((data: any) => {
           return {
+            id: data.id,
             crewName: data.name,
             job: data.job,
             image: `${baseURL + imageSize + data.profile_path}`,

@@ -1,6 +1,7 @@
 const initialState = {
   isLoading: false,
   searchTerm: "",
+  selectedMovie: null,
   selectedGenres: [],
   genres: [],
   movies: [],
@@ -11,6 +12,18 @@ const rootReducer = (state = initialState, action: any) => {
     case "SET_SEARCH_TERM":
       return { ...state, searchTerm: action.payload };
     case "SELECT_GENRE":
+      if (action.payload !== 0 && state.selectedGenres[0] === 0) {
+        return {
+          ...state,
+          selectedGenres: [action.payload],
+        };
+      }
+      if (action.payload === 0) {
+        return {
+          ...state,
+          selectedGenres: [action.payload],
+        };
+      }
       return {
         ...state,
         selectedGenres: [...state.selectedGenres, action.payload],
@@ -26,6 +39,11 @@ const rootReducer = (state = initialState, action: any) => {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case "SET_SELECTED_MOVIE":
+      return {
+        ...state,
+        selectedMovie: action.payload,
       };
     default:
       return state;

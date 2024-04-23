@@ -22,3 +22,10 @@ export const setSearch = (searchTerm: string) => {
     payload: searchTerm,
   };
 };
+
+export const setSelectedMovie = (movieId: number) => {
+  return {
+    type: "SET_SELECTED_MOVIE",
+    payload: movieId,
+  };
+};

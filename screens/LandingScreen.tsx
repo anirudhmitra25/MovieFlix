@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+  SafeAreaView,
+  Platform,
+  StatusBar,
+} from "react-native";
 import Header from "../components/Header";
 import Genre from "../components/Genre";
 import _ from "lodash";
 import MoviesList from "../components/MoviesList";
+import SingleMovieData from "../components/SingleMovieData";
 import { getGenres } from "../api";
 import { setLoading } from "../store/actions";
 import { connect } from "react-redux";
@@ -11,15 +20,22 @@ interface ILandingScreen {
   isLoading?: boolean;
   setLoading?: any;
   navigation: any;
+  selectedMovie: number;
 }
 
 const LandingScreen = ({
   setLoading,
   isLoading,
   navigation,
+  selectedMovie,
 }: ILandingScreen) => {
   const [genres, setGenres] = useState<any>([]);
   const [yearsData, setYearsData] = useState([2012, 2013, 2014]);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
 
   useEffect(() => {
     getGenres()
@@ -31,12 +47,18 @@ const LandingScreen = ({
       });
   }, []);
 
+  useEffect(() => {
+    if (selectedMovie) {
+      toggleModal();
+    }
+  }, [selectedMovie]);
+
   const handleYearScroll = (direction: "up" | "down") => {
     if (direction === "up") {
       const firstYear = yearsData[0];
       if (firstYear > 1800) {
         const newYears = Array.from({ length: 5 }, (_, index) =>
-          Math.max(1980, firstYear - index - 1)
+          Math.max(1800, firstYear - index - 1)
         ).reverse();
         setYearsData((prevYears) => [...newYears, ...prevYears]);
       }
@@ -52,7 +74,10 @@ const LandingScreen = ({
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      {Platform.OS === "android" && (
+        <StatusBar backgroundColor="black" barStyle="light-content" />
+      )}
       <Header navigation={navigation} />
       <Genre genres={genres} />
       {isLoading ? (
@@ -71,7 +96,12 @@ const LandingScreen = ({
           showsVerticalScrollIndicator={false}
         />
       )}
-    </View>
+      <SingleMovieData
+        id={selectedMovie}
+        isVisible={modalVisible}
+        onClose={toggleModal}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -79,7 +109,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "black",
-    padding: 5,
+    paddingHorizontal: 5,
   },
   input: {
     height: 40,
@@ -112,6 +142,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state: any) => ({
   isLoading: state.isLoading,
+  selectedMovie: state.selectedMovie,
 });
 
 export default connect(mapStateToProps, { setLoading })(

@@ -37,11 +37,13 @@ interface IMovie {
 
 interface ICredits {
   cast: Array<{
+    id: number;
     actorName: string;
     characterName: string;
     image: string;
   }>;
   crew: Array<{
+    id: number;
     crewName: string;
     job: string;
     image: string;
@@ -138,7 +140,9 @@ const SingleMovieData: React.FC<MovieModalProps> = ({
                   ))}
                 </ScrollView>
               </View>
-              <Text style={styles.overview}>"{movie.tagline}"</Text>
+              {movie.tagline && (
+                <Text style={styles.overview}>"{movie.tagline}"</Text>
+              )}
               <Text
                 style={styles.overview}
                 numberOfLines={showAllOverview ? undefined : 3}
@@ -174,8 +178,8 @@ const SingleMovieData: React.FC<MovieModalProps> = ({
                 Cast
               </Text>
               <ScrollView horizontal contentContainerStyle={styles.castView}>
-                {credits.cast.map((cast) => (
-                  <View style={styles.castContainer}>
+                {credits.cast.map((cast, key) => (
+                  <View key={key} style={styles.castContainer}>
                     <Image
                       source={{ uri: cast.image }}
                       style={styles.castImage}
@@ -197,8 +201,8 @@ const SingleMovieData: React.FC<MovieModalProps> = ({
                 Crew
               </Text>
               <ScrollView horizontal contentContainerStyle={styles.castView}>
-                {credits.crew.map((crew) => (
-                  <View style={styles.castContainer}>
+                {credits.crew.map((crew, key) => (
+                  <View key={key} style={styles.castContainer}>
                     <Image
                       source={{ uri: crew.image }}
                       style={styles.castImage}
@@ -208,7 +212,7 @@ const SingleMovieData: React.FC<MovieModalProps> = ({
                   </View>
                 ))}
               </ScrollView>
-              <Text
+              {/* <Text
                 style={{
                   color: "white",
                   marginTop: 10,
@@ -232,7 +236,7 @@ const SingleMovieData: React.FC<MovieModalProps> = ({
               <View style={styles.financials}>
                 <Text style={styles.budget}>Budget: ${movie.budget}</Text>
                 <Text style={styles.budget}>Revenue: ${movie.revenue}</Text>
-              </View>
+              </View> */}
             </ScrollView>
           </View>
         )}
