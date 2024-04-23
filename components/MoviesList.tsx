@@ -46,7 +46,7 @@ const MoviesList = ({ year, selectedGenres }: IMovieList) => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.movieList}
       >
-        {movies.map((movie) => (
+        {movies && movies.map((movie) => (
           <View style={styles.movieContainer} key={movie.id}>
             <Movie
               id={movie.id}
