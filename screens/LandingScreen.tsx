@@ -1,30 +1,21 @@
 import React, { useEffect, useState } from "react";
 import {
-  View,
   StyleSheet,
   FlatList,
-  ActivityIndicator,
   SafeAreaView,
   Platform,
   StatusBar,
 } from "react-native";
 import _ from "lodash";
 import { getGenres } from "../api";
-import { setLoading } from "../store/actions";
 import { connect } from "react-redux";
 import { Header, SingleMovieData, MoviesList, Genre } from "../components";
 interface ILandingScreen {
-  isLoading?: boolean;
-  setLoading?: any;
   navigation: any;
   selectedMovie: number;
 }
 
-const LandingScreen = ({
-  isLoading,
-  navigation,
-  selectedMovie,
-}: ILandingScreen) => {
+const LandingScreen = ({ navigation, selectedMovie }: ILandingScreen) => {
   const [genres, setGenres] = useState<any>([]);
   const [yearsData, setYearsData] = useState([2012, 2013, 2014]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -76,22 +67,16 @@ const LandingScreen = ({
       )}
       <Header navigation={navigation} />
       <Genre genres={genres} />
-      {isLoading ? (
-        <View style={styles.loaderContainer}>
-          <ActivityIndicator size="large" color="white" />
-        </View>
-      ) : (
-        <FlatList
-          data={yearsData}
-          keyExtractor={(item) => item.toString()}
-          renderItem={({ item }) => <MoviesList year={item} />}
-          onEndReached={() => handleYearScroll("down")}
-          onEndReachedThreshold={0.1}
-          onRefresh={yearsData[0] > 1800 ? () => handleYearScroll("up") : null}
-          refreshing={false}
-          showsVerticalScrollIndicator={false}
-        />
-      )}
+      <FlatList
+        data={yearsData}
+        keyExtractor={(item) => item.toString()}
+        renderItem={({ item }) => <MoviesList year={item} />}
+        onEndReached={() => handleYearScroll("down")}
+        onEndReachedThreshold={0.1}
+        onRefresh={yearsData[0] > 1800 ? () => handleYearScroll("up") : null}
+        refreshing={false}
+        showsVerticalScrollIndicator={false}
+      />
       <SingleMovieData
         id={selectedMovie}
         isVisible={modalVisible}
@@ -137,10 +122,7 @@ const styles = StyleSheet.create({
   },
 });
 const mapStateToProps = (state: any) => ({
-  isLoading: state.isLoading,
   selectedMovie: state.selectedMovie,
 });
 
-export default connect(mapStateToProps, { setLoading })(
-  React.memo(LandingScreen)
-);
+export default connect(mapStateToProps)(React.memo(LandingScreen));

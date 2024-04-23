@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import SingleMovieData from "./SingleMovieData";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
 import { setSelectedMovie } from "../store/actions";
@@ -10,7 +9,7 @@ interface IMovie {
   title: string;
   rating: string;
   image: string;
-  setSelectedMovie: any;
+  setSelectedMovie: (data: number) => void;
 }
 
 const Movie = ({ id, title, rating, image, setSelectedMovie }: IMovie) => {
@@ -79,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { setSelectedMovie })(Movie);
+export default connect(null, { setSelectedMovie })(React.memo(Movie));

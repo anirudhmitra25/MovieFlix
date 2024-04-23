@@ -5,9 +5,9 @@ import { selectGenre, unselectGenre } from "../store/actions";
 
 interface IGenres {
   genres: Array<IGenre>;
-  selectGenre: any;
+  selectGenre: (genre:number)=>void;
   selectedGenres: Array<number>;
-  unselectGenre: any;
+  unselectGenre: (genre:number)=>void;
 }
 interface IGenre {
   id: number;
@@ -62,7 +62,7 @@ const Genre = ({
             >
               {genre.name}
             </Text>
-            {selectedGenres.includes(genre.id) && genre.id!==0 && (
+            {selectedGenres.includes(genre.id) && genre.id !== 0 && (
               <TouchableOpacity
                 onPress={() => handleRemoveGenre(genre.id)}
                 style={styles.crossButton}
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   container: {
     minHeight: 36,
     paddingVertical: 20,
+    marginBottom: 20,
   },
   genreButton: {
     flexDirection: "row",
@@ -87,15 +88,15 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginRight: 8,
     backgroundColor: "#333",
-    borderRadius: 8,
+    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
     minHeight: 36,
   },
   genreText: {
     color: "white",
-    fontWeight: "400",
-    marginRight: 8,
+    fontWeight: "500",
+    marginHorizontal: 4,
   },
   selectedGenre: {
     backgroundColor: "#ec2d01",

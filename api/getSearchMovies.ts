@@ -1,9 +1,14 @@
 import axios from "axios";
+interface IParams {
+  api_key: string;
+  query: string;
+  page: number;
+}
 export default async function getSearchMovies(
   searchTerm: string,
   pageNum: number
 ) {
-  const params: any = {
+  const params: IParams = {
     api_key: "2dca580c2a14b55200e784d157207b4d",
     query: searchTerm,
     page: pageNum,

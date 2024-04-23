@@ -17,7 +17,13 @@ import { setSearch } from "../store/actions";
 import _ from "lodash";
 import { SingleMovieData } from "../components";
 
-const SearchScreen = ({ navigation, searchTerm, setSearch }: any) => {
+interface ISearchScreen {
+  navigation: any;
+  searchTerm: string;
+  setSearch: (data: string) => void;
+}
+
+const SearchScreen = ({ navigation, searchTerm, setSearch }: ISearchScreen) => {
   const [movies, setMovies] = useState<any>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -155,7 +161,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "black",
-    paddingHorizontal:20,
+    paddingHorizontal: 20,
   },
   image: {
     width: 100,
@@ -168,18 +174,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
-    marginTop:30
+    marginTop: 30,
   },
   searchContainer: {
     flex: 1,
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 10,
-    marginRight:20,
+    marginRight: 20,
     marginLeft: 10,
-    width:"100%",
-    height:40,
-    backgroundColor:"rgba(88,88,88,0.75)"
+    width: "100%",
+    height: 40,
+    backgroundColor: "rgba(88,88,88,0.75)",
   },
   searchInput: {
     flex: 1,
@@ -187,7 +193,7 @@ const styles = StyleSheet.create({
   },
   backIcon: {
     marginRight: 10,
-    marginLeft:15
+    marginLeft: 15,
   },
   movieItem: {
     paddingVertical: 10,

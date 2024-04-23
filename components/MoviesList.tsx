@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import Movie from "./Movie";
 import { connect } from "react-redux";
 import { getMoviesList } from "../api";
@@ -21,10 +15,9 @@ interface IMovie {
 interface IMovieList {
   year: number;
   selectedGenres?: Array<number>;
-  isLoading?: boolean;
 }
 
-const MoviesList = ({ year, selectedGenres, isLoading }: IMovieList) => {
+const MoviesList = ({ year, selectedGenres }: IMovieList) => {
   const [movies, setMovies] = useState<Array<IMovie>>([]);
 
   useEffect(() => {
@@ -44,14 +37,6 @@ const MoviesList = ({ year, selectedGenres, isLoading }: IMovieList) => {
 
     loadMovies();
   }, [year, selectedGenres]);
-
-  if (isLoading) {
-    return (
-      <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="white" />
-      </View>
-    );
-  }
 
   return (
     <View key={year} style={styles.container}>
@@ -79,7 +64,7 @@ const MoviesList = ({ year, selectedGenres, isLoading }: IMovieList) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "black",
-    padding: 5,
+    padding: 0,
   },
   loaderContainer: {
     flex: 1,
@@ -88,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   movieList: {
-    paddingTop: 15,
+    paddingTop: 10,
     paddingHorizontal: 10,
   },
   movieContainer: {
@@ -96,9 +81,9 @@ const styles = StyleSheet.create({
   },
   year: {
     color: "white",
-    fontWeight: "600",
-    fontSize: 30,
-    marginTop: 10,
+    fontWeight: "500",
+    fontSize: 25,
+    marginTop: 5,
     paddingHorizontal: 10,
   },
 });

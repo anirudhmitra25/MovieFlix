@@ -3,11 +3,19 @@ interface IGetMoviesList {
   selectedGenres: Array<number>;
   year: number;
 }
+interface IParams {
+  api_key: string;
+  sort_by: string;
+  primary_release_year: number;
+  page: number;
+  "vote_count.gte": number;
+  with_genres?: string;
+}
 export default async function getMoviesList({
   selectedGenres,
   year,
 }: IGetMoviesList) {
-  const params: any = {
+  const params: IParams = {
     api_key: "2dca580c2a14b55200e784d157207b4d",
     sort_by: "popularity.desc",
     primary_release_year: year,
