@@ -49,5 +49,5 @@ npm start
 3. Scan the QR code displayed in the terminal using the Expo Go app.
 4. The app will be compiled and launched on your device.
 
-##Troubleshooting
+## Troubleshooting
 If you encounter any issues while running the project, feel free to reach out to [anirudhmitra25@gmail.com] for assistance.
